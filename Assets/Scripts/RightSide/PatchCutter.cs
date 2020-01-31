@@ -1,21 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
-
-public class LineDrawer : MonoBehaviour
+public class PatchCutter : MonoBehaviour
 {
     public LineRenderer Renderer;
+    public MeshFilter Filter;
+    public bool CanCut = true;
 
     private bool _mouseBeingHeld = false;
     private List<Vector2> _points = new List<Vector2>();
+    private bool _isCutting = false;
 
     private void Update() 
     {
         UpdateMouseBeingHeld();
 
-        if(_mouseBeingHeld)
+        if(_mouseBeingHeld && _isCutting)
         {
             Vector2 mouseCurrentWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -30,11 +32,15 @@ public class LineDrawer : MonoBehaviour
     {
         if(MouseHoldBegin())
         {
-            StartLine();
+            if(CanCut)
+                StartLine();
+
             _mouseBeingHeld = true;
         }
         else if(MouseHoldEnd())
         {
+            FinishLine();
+            ConvertLineToMesh();
             _mouseBeingHeld = false;
         }
     }
@@ -53,6 +59,9 @@ public class LineDrawer : MonoBehaviour
 
     private void StartLine()
     {
+        _isCutting = true;
+        CanCut = false;
+        
         Vector2 currentMousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         _points.Clear();
@@ -69,5 +78,33 @@ public class LineDrawer : MonoBehaviour
     {
         _points.Add(newPosition);
         Renderer.SetPosition(Renderer.positionCount++, newPosition);
+    }
+    private void FinishLine()
+    {
+        _isCutting = false;
+        UpdateLine(_points.First());
+    }
+
+    private void ConvertLineToMesh()
+    {
+        Triangulator tr = new Triangulator(_points);
+        int[] indices = tr.Triangulate();
+ 
+        // Create the Vector3 vertices
+        Vector3[] vertices = new Vector3[_points.Count];
+        for (int i = 0; i < vertices.Length; i++) 
+        {
+            vertices[i] = new Vector3(_points[i].x, _points[i].y, 0);
+        }
+ 
+        // Create the mesh
+        Mesh msh = new Mesh();
+        msh.vertices = vertices;
+        msh.triangles = indices.Reverse().ToArray();
+        msh.RecalculateNormals();
+        msh.RecalculateBounds();
+ 
+        // Set up game object with mesh;
+        Filter.mesh = msh;
     }
 }
