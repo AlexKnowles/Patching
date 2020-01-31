@@ -2,12 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SquareHoleGenerator : MonoBehaviour
+public enum Shape 
+{
+    Triangle,
+    Square,
+    Pentagon,
+    Hexagon
+}
+
+public class Hole : MonoBehaviour
 {
     public Material material;
 
-    float width = 1;
-    float height = 1;
+    public float width = 1;
+    public float height = 1;
+
+    public Shape shapeType = Shape.Triangle;
 
     // Start is called before the first frame update
     void Start()
