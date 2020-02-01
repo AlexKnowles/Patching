@@ -22,8 +22,9 @@ public class Controller : MonoBehaviour
 
     public void ResetGame()
     {
-        SceneManager.LoadScene("Game");
+        GameManager.GetComponent<GameManager>().StartGame();
     }
+
     public void Update(){
         if(TimeRemaining == 0){
             ResetButton.SetActive(true);

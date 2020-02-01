@@ -9,8 +9,8 @@ public class Blanket : MonoBehaviour
     public Material HoleMaterial;
 
     private Transform _thisTransform;
-    private List<GameObject> _holes;
-    private List<GameObject> _patches;
+    private List<GameObject> _holes = new List<GameObject>();
+    private List<GameObject> _patches = new List<GameObject>();
     private Vector3 _cameraTarget;
     private int _cameraXOffset = 5;
     private int _xMod = 1;
@@ -21,7 +21,7 @@ public class Blanket : MonoBehaviour
 
     void Awake()
     {
-        ResetCamera();
+        
     }
 
     private void ResetCamera()
@@ -29,6 +29,7 @@ public class Blanket : MonoBehaviour
         _thisTransform = GetComponent<Transform>();
         _cameraTarget = new Vector3(_cameraXOffset,0,0);
         Camera.main.transform.position = _cameraTarget;
+        Camera.main.orthographicSize = 5;
     }
 
     // Start is called before the first frame update
@@ -36,8 +37,10 @@ public class Blanket : MonoBehaviour
     {
         ResetCamera();
         _canPatch = true;
-        _holes = new List<GameObject>();
-        _patches = new List<GameObject>();
+        _holes.ForEach(x => GameObject.Destroy(x));
+        _patches.ForEach(x => GameObject.Destroy(x));
+        _holes.Clear();
+        _patches.Clear();
 
         for (int i = 0; i < 22; i++){
             hole.GetComponent<Hole>().Difficulty = i;
