@@ -46,7 +46,7 @@ public class Blanket : MonoBehaviour
             var holePosition = new Vector3(
                 _xPos * _xMod, 
                 _yPos * _yMod, 
-                0);
+                1);
 
             if(_xPos < 7){
                 if(_xMod == 1 && _yMod == 1){

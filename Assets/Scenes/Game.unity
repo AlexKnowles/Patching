@@ -208,9 +208,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 85300510}
-  - {fileID: 1329125413}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &683563211
 GameObject:
@@ -496,14 +495,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1329125413 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6256511880276377630, guid: b1c4dad02dab3cc49bb264fb4094b6b0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1601147695}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1570375935
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +550,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 572021608}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6256511880276377627, guid: b1c4dad02dab3cc49bb264fb4094b6b0,
         type: 3}
@@ -587,7 +580,7 @@ PrefabInstance:
     - target: {fileID: 6256511880276377630, guid: b1c4dad02dab3cc49bb264fb4094b6b0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6256511880276377630, guid: b1c4dad02dab3cc49bb264fb4094b6b0,
         type: 3}
@@ -612,7 +605,7 @@ PrefabInstance:
     - target: {fileID: 6256511880276377630, guid: b1c4dad02dab3cc49bb264fb4094b6b0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6256511880276377630, guid: b1c4dad02dab3cc49bb264fb4094b6b0,
         type: 3}
@@ -818,7 +811,7 @@ RectTransform:
   - {fileID: 1570375936}
   - {fileID: 683563212}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -943,12 +936,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136844001}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2002679102}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2136844003
 MonoBehaviour:
