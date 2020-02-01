@@ -43,7 +43,7 @@
                 v2f o;
                 //convert the vertex positions from object space to clip space so they can be rendered
                 o.position = UnityObjectToClipPos(v.vertex);
-                o.screenPosition = ComputeScreenPos(o.position);
+                o.screenPosition = mul(unity_ObjectToWorld, v.vertex);
                 return o;
             }
 
