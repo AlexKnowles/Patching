@@ -7,13 +7,13 @@ public class PatchMaker : MonoBehaviour
     public GameObject PatchObjectPrefab;
     public PatchCutter Cutter;
     public PatchMover Mover;
-    public MockBlanket Blanket;
+    public Blanket Blanket;
 
     public GameObject CurrentPatch {get; private set;}
 
     private Transform _thisTransform;
 
-    private void Start()
+    private void Awake()
     {
         _thisTransform = GetComponent<Transform>();
         CreatePatch();
