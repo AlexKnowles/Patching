@@ -14,8 +14,7 @@ public class PatchMover : MonoBehaviour
 
     private void Start() 
     {
-        _patchObjectTransform = Maker.CurrentPatch.GetComponent<Transform>();
-
+        Reset(); 
         _mouseDrag = new MouseDrag(StartMove, FinishMove);
     }
 
@@ -27,6 +26,12 @@ public class PatchMover : MonoBehaviour
         {            
             UpdateMove();
         }   
+    }
+
+    public void Reset() 
+    {
+        _patchObjectTransform = Maker.CurrentPatch.GetComponent<Transform>();
+        _patchDropped = false;
     }
 
     public void StartMove()
@@ -51,6 +56,9 @@ public class PatchMover : MonoBehaviour
     {
         if(!Cutter.IsCutFinished())
             return;
+
         _patchDropped = true;
+
+        Maker.SendPatchToBlanket();
     }
 }

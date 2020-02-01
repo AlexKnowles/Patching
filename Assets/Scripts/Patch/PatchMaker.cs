@@ -5,6 +5,8 @@ using UnityEngine;
 public class PatchMaker : MonoBehaviour
 {
     public GameObject PatchObjectPrefab;
+    public PatchCutter Cutter;
+    public PatchMover Mover;
     public MockBlanket Blanket;
 
     public GameObject CurrentPatch {get; private set;}
@@ -25,6 +27,11 @@ public class PatchMaker : MonoBehaviour
     public void SendPatchToBlanket()
     {
         Blanket.ReceivePatch(CurrentPatch);
+
+        CreatePatch();
+
+        Cutter.Reset();
+        Mover.Reset();
     }
     
 }

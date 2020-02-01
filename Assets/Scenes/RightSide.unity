@@ -152,6 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PatchObjectPrefab: {fileID: 1728876857191591449, guid: 582e45b30eb242a4ca5b015129baa83e,
     type: 3}
+  Cutter: {fileID: 1985126194}
+  Mover: {fileID: 294382833}
   Blanket: {fileID: 556088426}
 --- !u!4 &68838094
 Transform:

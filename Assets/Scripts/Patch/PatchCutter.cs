@@ -16,9 +16,7 @@ public class PatchCutter : MonoBehaviour
 
     private void Start() 
     {
-        _patchObjectRenderer = Maker.CurrentPatch.GetComponent<LineRenderer>();
-        _patchObjectMeshFilter = Maker.CurrentPatch.GetComponent<MeshFilter>();
-
+        Reset();
         _mouseDrag = new MouseDrag(StartCut, FinishCut);
     }
 
@@ -40,6 +38,15 @@ public class PatchCutter : MonoBehaviour
     public bool IsCutFinished()
     {
         return (!_canCut && !_isCutting);
+    }
+
+    public void Reset()
+    {
+        _patchObjectRenderer = Maker.CurrentPatch.GetComponent<LineRenderer>();
+        _patchObjectMeshFilter = Maker.CurrentPatch.GetComponent<MeshFilter>();
+
+        _canCut = true;
+        _isCutting = false;
     }
 
     private void StartCut()
@@ -69,6 +76,9 @@ public class PatchCutter : MonoBehaviour
     }
     private void FinishCut()
     {
+        if(!_isCutting)
+            return;
+            
         _isCutting = false;
         UpdateCut(_points.First());
         ConvertLineToMesh();
