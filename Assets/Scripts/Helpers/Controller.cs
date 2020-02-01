@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
-    public void NextScene()
+    public void StartGame()
     {
         SceneManager.LoadScene("LeftSide");
     }

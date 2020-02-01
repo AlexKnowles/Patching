@@ -11,6 +11,7 @@ public class Blanket : MonoBehaviour
 
     private List<GameObject> _holes;
     private List<GameObject> _patches;
+    private int _patchNumber = 0;
     public Material HoleMaterial;
 
     private Vector3 _cameraTarget;
@@ -34,10 +35,11 @@ public class Blanket : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         _holes = new List<GameObject>();
         _patches = new List<GameObject>();
+        _patchNumber = 0;
 
         for (int i = 0; i < 22; i++){
             hole.GetComponent<Hole>().Difficulty = i;
@@ -93,9 +95,12 @@ public class Blanket : MonoBehaviour
     public void ReceivePatch(GameObject patch)
     {
         if(Time.time < EndTime){
+            Debug.Log("Patches Count: " + _patches.Count);
+            Debug.Log("Holes Count: " + _holes.Count);
             patch.transform.SetParent(_thisTransform, true);
             _patches.Add(patch);
-            _cameraTarget = _holes[_patches.Count].transform.position;
+            _patchNumber++;
+            _cameraTarget = _holes[_patchNumber].transform.position;
             _cameraTarget.x = _cameraTarget.x + _cameraXOffset;
             _nextCameraMove = Time.time + _timeToKill;
         } else {
