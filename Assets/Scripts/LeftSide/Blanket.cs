@@ -39,12 +39,14 @@ public class Blanket : MonoBehaviour
         for (int i = 0; i < 30; i++){
             hole.GetComponent<Hole>().Difficulty = i;
             var holePosition = new Vector3(
-                _xPos * (UnityEngine.Random.value + 1.0f) * _xMod, 
-                _yPos * (UnityEngine.Random.value + 1.0f) * _yMod, 
+                _xPos * (UnityEngine.Random.value + 0.5f) * _xMod, 
+                _yPos * (UnityEngine.Random.value + 0.5f) * _yMod, 
                 0);
 
             if(_xMod == 1 && _yMod == 1){
                 _xMod = -1;
+                _xPos = _xPos + 5;
+                _yPos = _yPos + 5;
             } else if(_xMod == -1 && _yMod == 1){
                 _yMod = -1;
             } else if(_xMod == -1 && _yMod == -1){
@@ -53,9 +55,6 @@ public class Blanket : MonoBehaviour
                 _yMod = 1;
             }
 
-            _xPos = _xPos + 6;
-            
-            _yPos = _yPos + 6;
 
             GameObject newHole = Instantiate(hole, holePosition , Quaternion.Euler(0, 0, 30 * UnityEngine.Random.value));
             newHole.name = "My Hole " + i;
@@ -69,7 +68,6 @@ public class Blanket : MonoBehaviour
     {
         patch.transform.SetParent(_thisTransform, true);
         _patches.Add(patch);
-        //TODO: Move camera to new hole
         _cameraTarget = _holes[_patches.Count].transform.position;
         _cameraTarget.x = _cameraTarget.x + _cameraXOffset;
         nextCameraMove = Time.time + timeToKill;
