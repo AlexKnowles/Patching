@@ -17,6 +17,12 @@ public class Blanket : MonoBehaviour
 
     private int _cameraXOffset = 5;
 
+    private int _xMod = 1;
+    private int _yMod = 1;
+
+    private int _xPos = 0;
+    private int _yPos = 0;
+
     void Awake()
     {
         _thisTransform = GetComponent<Transform>();
@@ -29,9 +35,29 @@ public class Blanket : MonoBehaviour
     {
         _holes = new List<GameObject>();
         _patches = new List<GameObject>();
+
         for (int i = 0; i < 30; i++){
             hole.GetComponent<Hole>().Difficulty = i;
-            GameObject newHole = Instantiate(hole, new Vector3(6 * i, 6 * i, 0), Quaternion.Euler(0, 0, 30 * i));
+            var holePosition = new Vector3(
+                _xPos * (UnityEngine.Random.value + 1.0f) * _xMod, 
+                _yPos * (UnityEngine.Random.value + 1.0f) * _yMod, 
+                0);
+
+            if(_xMod == 1 && _yMod == 1){
+                _xMod = -1;
+            } else if(_xMod == -1 && _yMod == 1){
+                _yMod = -1;
+            } else if(_xMod == -1 && _yMod == -1){
+                _xMod = 1;
+            } else if(_xMod == 1 && _yMod == -1){
+                _yMod = 1;
+            }
+
+            _xPos = _xPos + 6;
+            
+            _yPos = _yPos + 6;
+
+            GameObject newHole = Instantiate(hole, holePosition , Quaternion.Euler(0, 0, 30 * UnityEngine.Random.value));
             newHole.name = "My Hole " + i;
             newHole.GetComponent<MeshRenderer>().material = HoleMaterial;
             newHole.transform.parent = _thisTransform;
