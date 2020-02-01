@@ -6,6 +6,7 @@ using UnityEngine;
 public class PatchCutter : MonoBehaviour
 {
     public PatchMaker Maker;
+    public OffcutHole OffcutHole;
 
     private LineRenderer _patchObjectLineRenderer;
     private MeshFilter _patchObjectMeshFilter;
@@ -83,6 +84,7 @@ public class PatchCutter : MonoBehaviour
 
         UpdateCut(_points.First());
         ConvertLineToMesh();
+        OffcutHole.Create();
         _patchObjectLineRenderer.enabled = false;
     }
 

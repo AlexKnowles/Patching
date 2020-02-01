@@ -33,5 +33,4 @@ public class PatchMaker : MonoBehaviour
         Cutter.Reset();
         Mover.Reset();
     }
-    
 }
