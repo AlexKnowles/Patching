@@ -100,7 +100,7 @@ public class Blanket : MonoBehaviour
             patch.transform.SetParent(_thisTransform, true);
             _patches.Add(patch);
             _patchNumber++;
-            
+
             _cameraTarget = _holes[_patchNumber].transform.position;
             _cameraTarget.x = _cameraTarget.x + _cameraXOffset;
             _nextCameraMove = Time.time + _timeToKill;
