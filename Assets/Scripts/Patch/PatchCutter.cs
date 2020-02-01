@@ -7,7 +7,7 @@ public class PatchCutter : MonoBehaviour
 {
     public PatchMaker Maker;
 
-    private LineRenderer _patchObjectRenderer;
+    private LineRenderer _patchObjectLineRenderer;
     private MeshFilter _patchObjectMeshFilter;
     private MouseDrag _mouseDrag;
     private List<Vector2> _points = new List<Vector2>();
@@ -42,7 +42,7 @@ public class PatchCutter : MonoBehaviour
 
     public void Reset()
     {
-        _patchObjectRenderer = Maker.CurrentPatch.GetComponent<LineRenderer>();
+        _patchObjectLineRenderer = Maker.CurrentPatch.GetComponent<LineRenderer>();
         _patchObjectMeshFilter = Maker.CurrentPatch.GetComponent<MeshFilter>();
 
         _canCut = true;
@@ -64,24 +64,26 @@ public class PatchCutter : MonoBehaviour
         _points.Add(currentMousePositionInWorld);
         _points.Add(currentMousePositionInWorld);
 
-        _patchObjectRenderer.positionCount = 2;
-        _patchObjectRenderer.SetPosition(0, currentMousePositionInWorld);
-        _patchObjectRenderer.SetPosition(1, currentMousePositionInWorld);
+        _patchObjectLineRenderer.positionCount = 2;
+        _patchObjectLineRenderer.SetPosition(0, currentMousePositionInWorld);
+        _patchObjectLineRenderer.SetPosition(1, currentMousePositionInWorld);
         
     }
     private void UpdateCut(Vector2 newPosition)
     {
         _points.Add(newPosition);
-        _patchObjectRenderer.SetPosition(_patchObjectRenderer.positionCount++, newPosition);
+        _patchObjectLineRenderer.SetPosition(_patchObjectLineRenderer.positionCount++, newPosition);
     }
     private void FinishCut()
     {
         if(!_isCutting)
             return;
-            
+
         _isCutting = false;
+
         UpdateCut(_points.First());
         ConvertLineToMesh();
+        _patchObjectLineRenderer.enabled = false;
     }
 
     private void ConvertLineToMesh()
