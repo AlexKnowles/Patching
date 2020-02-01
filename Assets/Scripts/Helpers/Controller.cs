@@ -7,6 +7,6 @@ public class Controller : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("LeftSide");
+        SceneManager.LoadScene("Game");
     }
 }
