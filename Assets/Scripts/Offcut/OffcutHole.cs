@@ -18,6 +18,15 @@ public class OffcutHole : MonoBehaviour
         SetupTexture();
     }
 
+    public void Clear()
+    {
+        if(_currentCutout == null)
+            return;
+
+        GameObject.Destroy(_currentCutout); 
+        _currentCutout = null;
+    }
+
     private void Start() 
     {
         _thisTransform = GetComponent<Transform>();

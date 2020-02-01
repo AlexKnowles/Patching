@@ -12,6 +12,8 @@ public class PatchCutter : MonoBehaviour
     private MeshFilter _patchObjectMeshFilter;
     private MouseDrag _mouseDrag;
     private List<Vector2> _points = new List<Vector2>();
+    private Transform _offcutHoleTransform;
+    private Bounds _offcutHoleBounds;
     private bool _canCut = true;
     private bool _isCutting = false;
 
@@ -43,11 +45,15 @@ public class PatchCutter : MonoBehaviour
 
     public void Reset()
     {
+        _offcutHoleTransform = OffcutHole.GetComponent<Transform>();
+        _offcutHoleBounds = OffcutHole.GetComponent<MeshFilter>().mesh.bounds;
         _patchObjectLineRenderer = Maker.CurrentPatch.GetComponent<LineRenderer>();
         _patchObjectMeshFilter = Maker.CurrentPatch.GetComponent<MeshFilter>();
 
         _canCut = true;
         _isCutting = false;
+
+        OffcutHole.Clear();
     }
 
     private void StartCut()
@@ -58,7 +64,7 @@ public class PatchCutter : MonoBehaviour
         _isCutting = true;
         _canCut = false;
         
-        Vector2 currentMousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 currentMousePositionInWorld = ConstrainPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
         _points.Clear();
 
@@ -72,6 +78,8 @@ public class PatchCutter : MonoBehaviour
     }
     private void UpdateCut(Vector2 newPosition)
     {
+        newPosition = ConstrainPosition(newPosition);
+
         _points.Add(newPosition);
         _patchObjectLineRenderer.SetPosition(_patchObjectLineRenderer.positionCount++, newPosition);
     }
@@ -84,8 +92,9 @@ public class PatchCutter : MonoBehaviour
 
         UpdateCut(_points.First());
         ConvertLineToMesh();
+        AddShadow();
+
         OffcutHole.Create();
-        _patchObjectLineRenderer.enabled = false;
     }
 
     private void ConvertLineToMesh()
@@ -109,5 +118,37 @@ public class PatchCutter : MonoBehaviour
  
         // Set up game object with mesh;
         _patchObjectMeshFilter.mesh = msh;
+    }
+
+    private void AddShadow()
+    {
+        _patchObjectLineRenderer.startWidth = 0.08f;
+        _patchObjectLineRenderer.endWidth = 0.08f;
+
+        _patchObjectLineRenderer.startColor = new Color(0, 0, 0, 50f/255f);
+        _patchObjectLineRenderer.endColor = new Color(0, 0, 0, 50f/255f);
+    }
+
+    private Vector3 ConstrainPosition(Vector3 desiredPosition)
+    {
+        float newX = desiredPosition.x;
+        float newY = desiredPosition.y;
+        float newZ = desiredPosition.z;
+
+        Vector3 actualPosition = desiredPosition;
+        Vector3 minInWorld = _offcutHoleTransform.TransformPoint(_offcutHoleBounds.min);
+        Vector3 maxInWorld = _offcutHoleTransform.TransformPoint(_offcutHoleBounds.max);
+
+        if(newX < minInWorld.x)
+            newX = minInWorld.x;
+        else if(newX > maxInWorld.x)
+            newX = maxInWorld.x;
+
+        if(newY < minInWorld.y)
+            newY = minInWorld.y;
+        else if(newY > maxInWorld.y)
+            newY = maxInWorld.y;
+
+        return new Vector3(newX, newY, newZ);
     }
 }
