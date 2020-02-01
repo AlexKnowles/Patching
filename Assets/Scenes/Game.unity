@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 1060211116}
   - component: {fileID: 1060211115}
   m_Layer: 0
-  m_Name: Background
+  m_Name: BackgroundGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -616,8 +616,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060211114}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 100}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 7}
+  m_LocalScale: {x: 15, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -1147,5 +1147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hole: {fileID: 5954279441525003793, guid: 1e909e1f958019143a91ba94ff3f11c9, type: 3}
-  HoleMaterial: {fileID: 2100000, guid: 87a7557248e6b2d4985a2fac18b6a901, type: 2}
+  HoleMaterial: {fileID: 2100000, guid: 56eda04a71e9bee4da43f32b95c89127, type: 2}
   EndTime: 0

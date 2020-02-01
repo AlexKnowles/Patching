@@ -7,9 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MainBackground
-  m_Shader: {fileID: -6465566751694194690, guid: 72dc4b290b7c72149ac2a3b386d649b5,
-    type: 3}
+  m_Name: BackBoard
+  m_Shader: {fileID: 4800000, guid: 5467803b2cd7a1248b446328306d4525, type: 3}
   m_ShaderKeywords: _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -81,10 +80,13 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GridEnabled: 0
+    - _GridSpacing: 1
     - _GridStep: 10
     - _GridWidth: 1
+    - _LineThickness: 0
     - _Metallic: 0
     - _Mode: 0
+    - _ODistance: 10000
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
@@ -93,13 +95,17 @@ Material:
     - _SunDisk: 2
     - _SunSize: 0
     - _SunSizeConvergence: 7.96
+    - _TDistance: 100000
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_7D45890D: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseColour: {r: 0.47058824, g: 0.6039216, b: 0.50980395, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _GridColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GridColour: {r: 0.6242435, g: 0.7924528, b: 0.67371684, a: 1}
     - _GroundColor: {r: 0.369, g: 0.349, b: 0.341, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _SideTexTint: {r: 0.47058824, g: 0.6039216, b: 0.50980395, a: 1}
