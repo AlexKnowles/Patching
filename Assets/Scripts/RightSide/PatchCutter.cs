@@ -7,60 +7,44 @@ public class PatchCutter : MonoBehaviour
 {
     public LineRenderer Renderer;
     public MeshFilter Filter;
-    public bool CanCut = true;
 
-    private bool _mouseBeingHeld = false;
+    private MouseDrag _mouseDrag;
     private List<Vector2> _points = new List<Vector2>();
+    private bool _canCut = true;
     private bool _isCutting = false;
+
+    private void Start() 
+    {
+        _mouseDrag = new MouseDrag(StartCut, FinishCut);
+    }
 
     private void Update() 
     {
-        UpdateMouseBeingHeld();
+        _mouseDrag.Update();
 
-        if(_mouseBeingHeld && _isCutting)
+        if(_mouseDrag.IsDragging && _isCutting)
         {
             Vector2 mouseCurrentWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            if(MouseMovedSinceLastUpdate(mouseCurrentWorldPosition))
+            
+            if(Vector2.Distance(mouseCurrentWorldPosition, _points.Last()) > .1f)
             {
-                UpdateLine(mouseCurrentWorldPosition);
+                UpdateCut(mouseCurrentWorldPosition);
             }
         }
     }
 
-    private void UpdateMouseBeingHeld()
+    public bool IsCutFinished()
     {
-        if(MouseHoldBegin())
-        {
-            if(CanCut)
-                StartLine();
-
-            _mouseBeingHeld = true;
-        }
-        else if(MouseHoldEnd())
-        {
-            FinishLine();
-            ConvertLineToMesh();
-            _mouseBeingHeld = false;
-        }
-    }
-    private bool MouseHoldBegin() 
-    {
-        return (!_mouseBeingHeld && Input.GetMouseButtonDown(0));
-    }
-    private bool MouseHoldEnd() 
-    {
-        return (_mouseBeingHeld && Input.GetMouseButtonUp(0));
-    }
-    private bool MouseMovedSinceLastUpdate(Vector2 newPosition)
-    {
-        return (Vector2.Distance(newPosition, _points.Last()) > .1f);
+        return !(_canCut && _isCutting);
     }
 
-    private void StartLine()
+    private void StartCut()
     {
+        if(!_canCut)
+            return;
+
         _isCutting = true;
-        CanCut = false;
+        _canCut = false;
         
         Vector2 currentMousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -74,15 +58,16 @@ public class PatchCutter : MonoBehaviour
         Renderer.SetPosition(1, currentMousePositionInWorld);
         
     }
-    private void UpdateLine(Vector2 newPosition)
+    private void UpdateCut(Vector2 newPosition)
     {
         _points.Add(newPosition);
         Renderer.SetPosition(Renderer.positionCount++, newPosition);
     }
-    private void FinishLine()
+    private void FinishCut()
     {
         _isCutting = false;
-        UpdateLine(_points.First());
+        UpdateCut(_points.First());
+        ConvertLineToMesh();
     }
 
     private void ConvertLineToMesh()

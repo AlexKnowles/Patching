@@ -4,14 +4,34 @@ using UnityEngine;
 
 public class PatchMover : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public PatchCutter Cutter;
+
+    private MouseDrag _mouseDrag;
+
+    private void Start() 
+    {
+        _mouseDrag = new MouseDrag(StartMove, FinishMove);
+    }
+
+    private void Update() 
+    {
+        _mouseDrag.Update();
+
+        if(_mouseDrag.IsDragging && Cutter.IsCutFinished()) 
+        {
+            Debug.Log("Dragggg");
+        }   
+    }
+
+    public void StartMove()
+    {
+
+    }
+    public void UpdateMove()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    public void FinishMove()
     {
         
     }
