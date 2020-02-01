@@ -11,6 +11,7 @@ public class PatchMover : MonoBehaviour
     private MouseDrag _mouseDrag;
     private Vector3 _mousePostionRelativeToPatch;
     private bool _patchDropped = false;
+    private bool _hasStarted = false;
 
     private void Start() 
     {
@@ -32,6 +33,7 @@ public class PatchMover : MonoBehaviour
     {
         _patchObjectTransform = Maker.CurrentPatch.GetComponent<Transform>();
         _patchDropped = false;
+        _hasStarted = false;
     }
 
     public void StartMove()
@@ -39,6 +41,8 @@ public class PatchMover : MonoBehaviour
         if(!Cutter.IsCutFinished() || _patchDropped)
             return;
         
+        _hasStarted = true;
+
         Vector3 mouseInWorldSpace = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         _mousePostionRelativeToPatch = new Vector3(_patchObjectTransform.position.x - mouseInWorldSpace.x, 
@@ -54,7 +58,7 @@ public class PatchMover : MonoBehaviour
     }
     public void FinishMove()
     {
-        if(!Cutter.IsCutFinished())
+        if(!Cutter.IsCutFinished() || !_hasStarted)
             return;
 
         _patchDropped = true;
