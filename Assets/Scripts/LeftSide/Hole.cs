@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Hole : MonoBehaviour
 {
-    public Material Material;
     public int Difficulty = 1;
 
     private System.Random _rand = new System.Random();
@@ -14,8 +13,6 @@ public class Hole : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<MeshRenderer>().material = Material;
-
         GetComponent<MeshFilter>().mesh = GenerateShape();
     }
     
