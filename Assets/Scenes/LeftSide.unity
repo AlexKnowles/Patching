@@ -390,3 +390,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hole: {fileID: 5954279441525003793, guid: 1e909e1f958019143a91ba94ff3f11c9, type: 3}
   HoleMaterial: {fileID: 2100000, guid: 87a7557248e6b2d4985a2fac18b6a901, type: 2}
+  EndTime: 0
