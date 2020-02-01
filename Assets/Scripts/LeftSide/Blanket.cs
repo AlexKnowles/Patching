@@ -95,11 +95,12 @@ public class Blanket : MonoBehaviour
     public void ReceivePatch(GameObject patch)
     {
         if(Time.time < EndTime){
-            Debug.Log("Patches Count: " + _patches.Count);
-            Debug.Log("Holes Count: " + _holes.Count);
+            
+            patch.transform.position = new Vector3(patch.transform.position.x, patch.transform.position.y,0.5f);
             patch.transform.SetParent(_thisTransform, true);
             _patches.Add(patch);
             _patchNumber++;
+            
             _cameraTarget = _holes[_patchNumber].transform.position;
             _cameraTarget.x = _cameraTarget.x + _cameraXOffset;
             _nextCameraMove = Time.time + _timeToKill;
