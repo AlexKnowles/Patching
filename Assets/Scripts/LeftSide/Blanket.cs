@@ -11,6 +11,7 @@ public class Blanket : MonoBehaviour
 
     private List<GameObject> _holes;
     private List<GameObject> _patches;
+    private int _patchNumber = 0;
     public Material HoleMaterial;
 
     private Vector3 _cameraTarget;
@@ -23,18 +24,22 @@ public class Blanket : MonoBehaviour
     private int _xPos = 0;
     private int _yPos = 0;
 
+    public float EndTime;
+
     void Awake()
     {
         _thisTransform = GetComponent<Transform>();
         _cameraTarget = new Vector3(_cameraXOffset,0,0);
         Camera.main.transform.position = _cameraTarget;
+        EndTime = Time.time + 20.0f;
     }
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         _holes = new List<GameObject>();
         _patches = new List<GameObject>();
+        _patchNumber = 0;
 
         for (int i = 0; i < 22; i++){
             hole.GetComponent<Hole>().Difficulty = i;
@@ -89,11 +94,18 @@ public class Blanket : MonoBehaviour
 
     public void ReceivePatch(GameObject patch)
     {
-        patch.transform.SetParent(_thisTransform, true);
-        _patches.Add(patch);
-        _cameraTarget = _holes[_patches.Count].transform.position;
-        _cameraTarget.x = _cameraTarget.x + _cameraXOffset;
-        _nextCameraMove = Time.time + _timeToKill;
+        if(Time.time < EndTime){
+            Debug.Log("Patches Count: " + _patches.Count);
+            Debug.Log("Holes Count: " + _holes.Count);
+            patch.transform.SetParent(_thisTransform, true);
+            _patches.Add(patch);
+            _patchNumber++;
+            _cameraTarget = _holes[_patchNumber].transform.position;
+            _cameraTarget.x = _cameraTarget.x + _cameraXOffset;
+            _nextCameraMove = Time.time + _timeToKill;
+        } else {
+            GameObject.Destroy(patch);
+        }
     }
 
     private float _nextCameraMove = 0.0f;
@@ -101,12 +113,25 @@ public class Blanket : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Time.time > _nextCameraMove ) {
+        if (Time.time < EndTime && Time.time > _nextCameraMove ) {
             Vector3 newVector = new Vector3(
                 Mathf.Lerp(Camera.main.transform.position.x, _cameraTarget.x, 6.0f * Time.deltaTime),
                 Mathf.Lerp(Camera.main.transform.position.y, _cameraTarget.y, 6.0f * Time.deltaTime),
                 -10
             );
+            Camera.main.transform.position = newVector;
+        }
+
+        if(Time.time > EndTime){
+            Vector3 newVector = new Vector3(
+                Mathf.Lerp(Camera.main.transform.position.x, 0, 3.0f * Time.deltaTime),
+                Mathf.Lerp(Camera.main.transform.position.y, 0, 3.0f * Time.deltaTime),
+                -10
+            );
+            if(Camera.main.orthographicSize < 35.0f)
+            {
+                Camera.main.orthographicSize += 0.1f;
+            }
             Camera.main.transform.position = newVector;
         }
     }
