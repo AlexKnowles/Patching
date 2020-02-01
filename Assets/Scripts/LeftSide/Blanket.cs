@@ -50,14 +50,14 @@ public class Blanket : MonoBehaviour
     }
 
     private float nextCameraMove = 0.0f;
-    private float timeToKill = 0.25f;
+    private float timeToKill = 0.2f;
 
     void LateUpdate()
     {
         if (Time.time > nextCameraMove ) {
             Vector3 newVector = new Vector3(
-                Mathf.Lerp(Camera.main.transform.position.x, _cameraTarget.x, 5.0f * Time.deltaTime),
-                Mathf.Lerp(Camera.main.transform.position.y, _cameraTarget.y, 5.0f * Time.deltaTime),
+                Mathf.Lerp(Camera.main.transform.position.x, _cameraTarget.x, 6.0f * Time.deltaTime),
+                Mathf.Lerp(Camera.main.transform.position.y, _cameraTarget.y, 6.0f * Time.deltaTime),
                 -10
             );
             Camera.main.transform.position = newVector;

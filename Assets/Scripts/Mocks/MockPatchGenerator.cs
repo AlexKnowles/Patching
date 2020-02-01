@@ -26,9 +26,9 @@ public class MockPatchGenerator : MonoBehaviour
     {
         Debug.Log("Generating patch");
         Patch.GetComponent<Hole>().Difficulty = 2;
-        GameObject newPatch = Instantiate(Patch, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
+        GameObject newPatch = Instantiate(Patch, Camera.main.transform.position, Quaternion.Euler(0, 0, 0));
         newPatch.name = "My Patch";
-        newPatch.transform.parent = GetComponent<Transform>();
+        newPatch.transform.position = new Vector3(newPatch.transform.position.x - 5, newPatch.transform.position.y, 0);
         Blanket.ReceivePatch(newPatch);
     }
 }
