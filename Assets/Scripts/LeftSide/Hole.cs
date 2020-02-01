@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 using UnityEngine;
 
 public enum Shape 
@@ -80,13 +82,15 @@ public class Hole : MonoBehaviour
 
     Mesh GenerateRandom()
     {
-        Vector2[] vertices2D = new Vector2[3];
+        float radius = 1f;
+        List<Vector2> vertices2D = new List<Vector2>();
 
-        vertices2D[0] = new Vector2(0, 1);
-        vertices2D[1] = new Vector2(-1, -1);
-        vertices2D[2] = new Vector2(1, -1);
+        for (int i = 0; i < Difficulty; i++){
+            float angle = i * Mathf.PI * 2 / Difficulty;
+            vertices2D.Add(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius);
+        }
 
-        return _getMeshFromVectors(vertices2D);
+        return _getMeshFromVectors(vertices2D.ToArray());
     }
 
     private Mesh _getMeshFromVectors(Vector2[] vertices2D){
