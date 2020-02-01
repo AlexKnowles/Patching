@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class PatchCutter : MonoBehaviour
 {
-    public LineRenderer Renderer;
-    public MeshFilter PatchObject;
+    public PatchMaker Maker;
 
+    private LineRenderer _patchObjectRenderer;
+    private MeshFilter _patchObjectMeshFilter;
     private MouseDrag _mouseDrag;
     private List<Vector2> _points = new List<Vector2>();
     private bool _canCut = true;
@@ -15,6 +16,9 @@ public class PatchCutter : MonoBehaviour
 
     private void Start() 
     {
+        _patchObjectRenderer = Maker.CurrentPatch.GetComponent<LineRenderer>();
+        _patchObjectMeshFilter = Maker.CurrentPatch.GetComponent<MeshFilter>();
+
         _mouseDrag = new MouseDrag(StartCut, FinishCut);
     }
 
@@ -53,15 +57,15 @@ public class PatchCutter : MonoBehaviour
         _points.Add(currentMousePositionInWorld);
         _points.Add(currentMousePositionInWorld);
 
-        Renderer.positionCount = 2;
-        Renderer.SetPosition(0, currentMousePositionInWorld);
-        Renderer.SetPosition(1, currentMousePositionInWorld);
+        _patchObjectRenderer.positionCount = 2;
+        _patchObjectRenderer.SetPosition(0, currentMousePositionInWorld);
+        _patchObjectRenderer.SetPosition(1, currentMousePositionInWorld);
         
     }
     private void UpdateCut(Vector2 newPosition)
     {
         _points.Add(newPosition);
-        Renderer.SetPosition(Renderer.positionCount++, newPosition);
+        _patchObjectRenderer.SetPosition(_patchObjectRenderer.positionCount++, newPosition);
     }
     private void FinishCut()
     {
@@ -90,6 +94,6 @@ public class PatchCutter : MonoBehaviour
         msh.RecalculateBounds();
  
         // Set up game object with mesh;
-        PatchObject.mesh = msh;
+        _patchObjectMeshFilter.mesh = msh;
     }
 }

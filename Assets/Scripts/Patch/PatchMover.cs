@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PatchMover : MonoBehaviour
 {
+    public PatchMaker Maker;
     public PatchCutter Cutter;
-    public Transform PatchObject;
 
+    private Transform _patchObjectTransform;
     private MouseDrag _mouseDrag;
     private Vector3 _mousePostionRelativeToPatch;
     private bool _patchDropped = false;
 
     private void Start() 
     {
+        _patchObjectTransform = Maker.CurrentPatch.GetComponent<Transform>();
+
         _mouseDrag = new MouseDrag(StartMove, FinishMove);
     }
 
@@ -33,14 +36,16 @@ public class PatchMover : MonoBehaviour
         
         Vector3 mouseInWorldSpace = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        _mousePostionRelativeToPatch = new Vector3(PatchObject.position.x - mouseInWorldSpace.x, PatchObject.position.y - mouseInWorldSpace.y, PatchObject.position.z);
+        _mousePostionRelativeToPatch = new Vector3(_patchObjectTransform.position.x - mouseInWorldSpace.x, 
+                                                    _patchObjectTransform.position.y - mouseInWorldSpace.y, 
+                                                    _patchObjectTransform.position.z);
 
-        PatchObject.position =  new Vector3(mouseInWorldSpace.x, mouseInWorldSpace.y, PatchObject.position.z);         
+        _patchObjectTransform.position =  new Vector3(mouseInWorldSpace.x, mouseInWorldSpace.y, _patchObjectTransform.position.z);         
     }
     public void UpdateMove()
     {
         Vector3 mouseInWorldSpace = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        PatchObject.position = _mousePostionRelativeToPatch + new Vector3(mouseInWorldSpace.x, mouseInWorldSpace.y, 0);
+        _patchObjectTransform.position = _mousePostionRelativeToPatch + new Vector3(mouseInWorldSpace.x, mouseInWorldSpace.y, 0);
     }
     public void FinishMove()
     {
