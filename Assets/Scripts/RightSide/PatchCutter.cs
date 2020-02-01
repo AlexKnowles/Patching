@@ -6,7 +6,7 @@ using UnityEngine;
 public class PatchCutter : MonoBehaviour
 {
     public LineRenderer Renderer;
-    public MeshFilter Filter;
+    public MeshFilter PatchObject;
 
     private MouseDrag _mouseDrag;
     private List<Vector2> _points = new List<Vector2>();
@@ -35,7 +35,7 @@ public class PatchCutter : MonoBehaviour
 
     public bool IsCutFinished()
     {
-        return !(_canCut && _isCutting);
+        return (!_canCut && !_isCutting);
     }
 
     private void StartCut()
@@ -90,6 +90,6 @@ public class PatchCutter : MonoBehaviour
         msh.RecalculateBounds();
  
         // Set up game object with mesh;
-        Filter.mesh = msh;
+        PatchObject.mesh = msh;
     }
 }
