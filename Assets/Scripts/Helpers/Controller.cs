@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
-    public GameObject GameManager;
-    public GameObject Timer;
+    public GameManager GameManager;
+    public Slider Timer;
     public GameObject ResetButton;
     public float TimeRemaining {
-        get { return GameManager.GetComponent<GameManager>().RemainingTime; }
+        get { return GameManager.RemainingTime; }
     }
     public bool Playing {
         get { return TimeRemaining > 0; }
@@ -22,7 +22,7 @@ public class Controller : MonoBehaviour
 
     public void ResetGame()
     {
-        GameManager.GetComponent<GameManager>().StartGame();
+        GameManager.StartGame();
     }
 
     public void Update(){
@@ -31,6 +31,6 @@ public class Controller : MonoBehaviour
         } else {
             ResetButton.SetActive(false);
         }
-        Timer.GetComponent<Text>().text = string.Format("{0:0.00}", TimeRemaining);
+        Timer.value = (TimeRemaining / GameManager.EndTime);
     }
 }

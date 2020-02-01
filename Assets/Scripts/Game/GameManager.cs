@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject Blanket;
+    public Blanket Blanket;
     public float RemainingTime {
         get { return EndTime - Time.time > 0 ? EndTime - Time.time : 0; }
     }
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     {
         if(Time.time > EndTime)
         {
-            Blanket.GetComponent<Blanket>().StopPatching();
+            Blanket.StopPatching();
         }
     }
 
@@ -31,6 +31,6 @@ public class GameManager : MonoBehaviour
     {
         StartTime = Time.time;
         EndTime = StartTime + _gameDuration;
-        Blanket.GetComponent<Blanket>().StartPatching();
+        Blanket.StartPatching();
     }
 }
