@@ -58,7 +58,7 @@ public class Blanket : MonoBehaviour
 
             GameObject newHole = Instantiate(hole, holePosition , Quaternion.Euler(0, 0, 30 * UnityEngine.Random.value));
             newHole.name = "My Hole " + i;
-            newHole.GetComponent<MeshRenderer>().material = HoleMaterial;
+            newHole.GetComponent<MeshRenderer>().sharedMaterial = HoleMaterial;
             newHole.transform.parent = _thisTransform;
             _holes.Add(newHole);
         }
