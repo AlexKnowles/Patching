@@ -29,7 +29,7 @@ public class Blanket : MonoBehaviour
     {
         _holes = new List<GameObject>();
         _patches = new List<GameObject>();
-        for (int i = 0; i < 20; i++){
+        for (int i = 0; i < 30; i++){
             hole.GetComponent<Hole>().Difficulty = i;
             GameObject newHole = Instantiate(hole, new Vector3(6 * i, 6 * i, 0), Quaternion.Euler(0, 0, 30 * i));
             newHole.name = "My Hole " + i;

@@ -156,8 +156,8 @@ Camera:
   m_GameObject: {fileID: 572021605}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.46991813, g: 0.6037736, b: 0.50955445, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Blanket: {fileID: 2136844003}
   Patch: {fileID: 5954279441525003793, guid: 1e909e1f958019143a91ba94ff3f11c9, type: 3}
+  PatchMaterial: {fileID: 2100000, guid: f5e4cfcb7b6cb264d8fb772cc03fe42a, type: 2}
   period: 1.5
 --- !u!4 &1613268920
 Transform:
