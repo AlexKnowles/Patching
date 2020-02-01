@@ -36,29 +36,52 @@ public class Blanket : MonoBehaviour
         _holes = new List<GameObject>();
         _patches = new List<GameObject>();
 
-        for (int i = 0; i < 30; i++){
+        for (int i = 0; i < 22; i++){
             hole.GetComponent<Hole>().Difficulty = i;
             var holePosition = new Vector3(
-                _xPos * (UnityEngine.Random.value + 0.5f) * _xMod, 
-                _yPos * (UnityEngine.Random.value + 0.5f) * _yMod, 
+                _xPos * _xMod, 
+                _yPos * _yMod, 
                 0);
 
-            if(_xMod == 1 && _yMod == 1){
-                _xMod = -1;
-                _xPos = _xPos + 5;
-                _yPos = _yPos + 5;
-            } else if(_xMod == -1 && _yMod == 1){
-                _yMod = -1;
-            } else if(_xMod == -1 && _yMod == -1){
-                _xMod = 1;
-            } else if(_xMod == 1 && _yMod == -1){
-                _yMod = 1;
+            if(_xPos < 7){
+                if(_xMod == 1 && _yMod == 1){
+                    _xMod = -1;
+                    _xPos = _xPos + 6;
+                    _yPos = _yPos + 6;
+                } else if(_xMod == -1 && _yMod == 1){
+                    _yMod = -1;
+                } else if(_xMod == -1 && _yMod == -1){
+                    _xMod = 1;
+                } else if(_xMod == 1 && _yMod == -1){
+                    _yMod = 1;
+                }
+            } else {
+                if(_xMod == 1 && _yMod == 1){
+                    _xMod = 0;
+                    _xPos = _xPos + 6;
+                    _yPos = _yPos + 6;
+                } else if(_xMod == 0 && _yMod == 1){
+                    _xMod = -1;
+                } else if(_xMod == -1 && _yMod == 1){
+                    _yMod = 0;
+                } else if(_xMod == -1 && _yMod == 0){
+                    _yMod = -1;
+                } else if(_xMod == -1 && _yMod == -1){
+                    _xMod = 0;
+                } else if(_xMod == 0 && _yMod == -1){
+                    _xMod = 1;
+                } else if(_xMod == 1 && _yMod == -1){
+                    _yMod = 0;
+                } else if(_xMod == 1 && _yMod == 0){
+                    _yMod = 1;
+                }
             }
+
 
 
             GameObject newHole = Instantiate(hole, holePosition , Quaternion.Euler(0, 0, 30 * UnityEngine.Random.value));
             newHole.name = "My Hole " + i;
-            newHole.GetComponent<MeshRenderer>().sharedMaterial = HoleMaterial;
+            newHole.GetComponent<MeshRenderer>().material = HoleMaterial;
             newHole.transform.parent = _thisTransform;
             _holes.Add(newHole);
         }
@@ -70,15 +93,15 @@ public class Blanket : MonoBehaviour
         _patches.Add(patch);
         _cameraTarget = _holes[_patches.Count].transform.position;
         _cameraTarget.x = _cameraTarget.x + _cameraXOffset;
-        nextCameraMove = Time.time + timeToKill;
+        _nextCameraMove = Time.time + _timeToKill;
     }
 
-    private float nextCameraMove = 0.0f;
-    private float timeToKill = 0.2f;
+    private float _nextCameraMove = 0.0f;
+    private float _timeToKill = 0.2f;
 
     void LateUpdate()
     {
-        if (Time.time > nextCameraMove ) {
+        if (Time.time > _nextCameraMove ) {
             Vector3 newVector = new Vector3(
                 Mathf.Lerp(Camera.main.transform.position.x, _cameraTarget.x, 6.0f * Time.deltaTime),
                 Mathf.Lerp(Camera.main.transform.position.y, _cameraTarget.y, 6.0f * Time.deltaTime),
