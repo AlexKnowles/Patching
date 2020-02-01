@@ -12,6 +12,7 @@ public class MockPatchGenerator : MonoBehaviour
         Patch.GetComponent<Hole>().Difficulty = 2;
         GameObject newPatch = Instantiate(Patch, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
         newPatch.name = "My Patch";
+        newPatch.transform.parent = GetComponent<Transform>();
         Blanket.ReceivePatch(newPatch);
     }
 
