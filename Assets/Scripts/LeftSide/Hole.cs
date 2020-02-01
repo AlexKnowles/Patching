@@ -22,11 +22,11 @@ public class Hole : MonoBehaviour
     Mesh GenerateShape()
     {
         List<Vector2> vertices2D = new List<Vector2>();
-
-        for (int i = 0; i < Difficulty + 3; i++){
+        int spokes = Difficulty + 3 < 16 ? Difficulty + 3 : 16;
+        for (int i = 0; i < spokes; i++){
             int posNeg = _rand.Next(0, 1) == 1 ? 1 : -1;
             float radius = 1f + (float)(((float)Difficulty*0.05f) * (_rand.NextDouble() * (float)posNeg));
-            float angle = i * Mathf.PI * 2 / (Difficulty + 3);
+            float angle = i * Mathf.PI * 2 / (spokes);
             vertices2D.Add(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius);
         }
 
