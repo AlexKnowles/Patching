@@ -5,7 +5,8 @@ using UnityEngine;
 public class OffcutHole : MonoBehaviour
 {
     public PatchMaker Maker;    
-    public Color BackgroundColor = new Color(233f/255f,203/255f,151/255f);
+    public Color BackgroundColor = new Color(0,0,0, 69/255f);
+    public Material HoleMaterial;
     private Transform _thisTransform;
     private GameObject _currentCutout;
 
@@ -36,23 +37,22 @@ public class OffcutHole : MonoBehaviour
     {
         Transform cutoutTransform = _currentCutout.GetComponent<Transform>();
         cutoutTransform.SetParent(_thisTransform, true);
-        cutoutTransform.position = new Vector3(cutoutTransform.position.x, cutoutTransform.position.y, 1);
+        cutoutTransform.position = new Vector3(cutoutTransform.position.x, cutoutTransform.position.y, 0.1f);
     }
     private void SetupLineRenderer()
     {
         LineRenderer cutoutLineRender = _currentCutout.GetComponent<LineRenderer>();
         cutoutLineRender.enabled = true;
 
-        cutoutLineRender.startWidth = 0.08f;
-        cutoutLineRender.endWidth = 0.08f;
+        cutoutLineRender.startWidth = 0.1f;
+        cutoutLineRender.endWidth = 0.1f;
 
         cutoutLineRender.startColor = BackgroundColor;
         cutoutLineRender.endColor = BackgroundColor;
     }
     private void SetupTexture()
     {
-        MeshRenderer cutoutRenderer = _currentCutout.GetComponent<MeshRenderer>();
-        
-        cutoutRenderer.material.SetColor("_Color", BackgroundColor);
+        MeshRenderer cutoutRenderer = _currentCutout.GetComponent<MeshRenderer>();        
+        cutoutRenderer.material = HoleMaterial;
     }
 }

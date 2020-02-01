@@ -449,6 +449,31 @@ PrefabInstance:
       propertyPath: Maker
       value: 
       objectReference: {fileID: 1601147696}
+    - target: {fileID: 8955456572832838876, guid: c2b8ff7010c82bc4eaa60607aefff94d,
+        type: 3}
+      propertyPath: HoleMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 339e065fabfa86741a15d18e244d6ffd, type: 2}
+    - target: {fileID: 8955456572832838876, guid: c2b8ff7010c82bc4eaa60607aefff94d,
+        type: 3}
+      propertyPath: BackgroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955456572832838876, guid: c2b8ff7010c82bc4eaa60607aefff94d,
+        type: 3}
+      propertyPath: BackgroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955456572832838876, guid: c2b8ff7010c82bc4eaa60607aefff94d,
+        type: 3}
+      propertyPath: BackgroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955456572832838876, guid: c2b8ff7010c82bc4eaa60607aefff94d,
+        type: 3}
+      propertyPath: BackgroundColor.a
+      value: 0.25490198
+      objectReference: {fileID: 0}
     - target: {fileID: 8955456572832838877, guid: c2b8ff7010c82bc4eaa60607aefff94d,
         type: 3}
       propertyPath: m_LocalPosition.x
