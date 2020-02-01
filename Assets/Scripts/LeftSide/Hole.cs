@@ -12,17 +12,16 @@ public enum Shape
 
 public class Hole : MonoBehaviour
 {
-    public Material material;
-    public Shape shapeType = Shape.Triangle;
-
-    public int difficulty = 1;
+    public Material Material;
+    public Shape ShapeType = Shape.Triangle;
+    public int Difficulty = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         Mesh mesh;
 
-        switch(shapeType){
+        switch(ShapeType){
             case Shape.Random:
                 mesh = GenerateRandom();
                 break;
@@ -38,7 +37,7 @@ public class Hole : MonoBehaviour
                 break;
         }
 
-        GetComponent<MeshRenderer>().material = material;
+        GetComponent<MeshRenderer>().material = Material;
 
         GetComponent<MeshFilter>().mesh = mesh;
     }

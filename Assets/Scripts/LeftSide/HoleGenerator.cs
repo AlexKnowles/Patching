@@ -11,7 +11,8 @@ public class HoleGenerator : MonoBehaviour
     {
         for (int i = 0; i < 50; i++){
             int shapeNum = i < 3 ? i : 3;
-            hole.GetComponent<Hole>().shapeType = (Shape)shapeNum;
+            hole.GetComponent<Hole>().ShapeType = (Shape)shapeNum;
+            hole.GetComponent<Hole>().Difficulty = i;
             Instantiate(hole, new Vector3(2 * i, 2 * i, 0), Quaternion.Euler(0, 0, 30 * i));
         }
     }
