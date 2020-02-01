@@ -10,7 +10,7 @@ public class HoleGenerator : MonoBehaviour
     void Start()
     {
         for (int i = 0; i < 50; i++){
-            hole.GetComponent<Hole>().Difficulty = i + 3;
+            hole.GetComponent<Hole>().Difficulty = i;
             Instantiate(hole, new Vector3(2 * i, 2 * i, 0), Quaternion.Euler(0, 0, 30 * i));
         }
     }

@@ -7,7 +7,9 @@ using UnityEngine;
 public class Hole : MonoBehaviour
 {
     public Material Material;
-    public int Difficulty = 3;
+    public int Difficulty = 1;
+
+    private System.Random _rand = new System.Random();
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +21,12 @@ public class Hole : MonoBehaviour
     
     Mesh GenerateShape()
     {
-        float radius = 1f;
         List<Vector2> vertices2D = new List<Vector2>();
 
-        for (int i = 0; i < Difficulty; i++){
-            float angle = i * Mathf.PI * 2 / Difficulty;
+        for (int i = 0; i < Difficulty + 3; i++){
+            int posNeg = _rand.Next(0, 1) == 1 ? 1 : -1;
+            float radius = 1f + (float)(((float)Difficulty*0.05f) * (_rand.NextDouble() * (float)posNeg));
+            float angle = i * Mathf.PI * 2 / (Difficulty + 3);
             vertices2D.Add(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius);
         }
 
