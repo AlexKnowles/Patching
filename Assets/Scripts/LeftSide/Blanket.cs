@@ -27,6 +27,7 @@ public class Blanket : MonoBehaviour
     public void ReceivePatch(GameObject patch)
     {
         patch.transform.SetParent(_thisTransform, true);
+        //TODO: Move camera to new hole
     }
 
     //Update is called once per frame
