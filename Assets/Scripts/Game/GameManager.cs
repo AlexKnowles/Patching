@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject Blanket;
     public float RemainingTime {
-        get { return EndTime - Time.time; }
+        get { return EndTime - Time.time > 0 ? EndTime - Time.time : 0; }
     }
     public float EndTime;
     public float StartTime;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void StartGame() 
+    public void StartGame() 
     {
         StartTime = Time.time;
         EndTime = StartTime + _gameDuration;
