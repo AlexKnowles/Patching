@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blanket : MonoBehaviour
+public class HoleGenerator : MonoBehaviour
 {
     public GameObject hole;
 
