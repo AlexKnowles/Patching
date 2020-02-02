@@ -6,7 +6,6 @@ using UnityEngine;
 public class Stencil : MonoBehaviour
 {
     private Hole _hole;
-
     private Transform _thisTransform;
     private LineRenderer _lineRenderer;
     private bool _loadVertsLater;
@@ -15,6 +14,7 @@ public class Stencil : MonoBehaviour
     {
         _thisTransform = GetComponent<Transform>();
         _lineRenderer = GetComponent<LineRenderer>();
+
     }
 
     private void Update()

@@ -2093,7 +2093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c70a5ebdc3cd584092917a00f287866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameLength: 20
+  GameLength: 200
 --- !u!1 &1467118048
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,7 +3076,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 61f68915b9d34724e85e945d58a6d676, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
