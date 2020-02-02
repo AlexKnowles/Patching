@@ -78,63 +78,55 @@ public class Blanket : MonoBehaviour
 
     private void CalculateScore(List<GameObject> holes, List<GameObject> patches)
     {
-        int i = 0;
-        float totalRemaining = 0;
-        float totalStartingHoleArea = 0;
-        foreach (var hole in holes){
-            float remaining = 0;
-            if(patches.Count > i){
-                remaining = CalculateRemainingAndOverlapArea(hole, patches[i]);
-            } else {
-                remaining = CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh);
-            }
-            totalRemaining += remaining;
-            totalStartingHoleArea += CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh); //Same calc as above for else hole mesh area;
-            i++;
-        }
-        float rawScore = (totalStartingHoleArea - (totalStartingHoleArea - totalRemaining));
-        int finalScore = 100 - (int)(((float)totalStartingHoleArea / (float)rawScore) * 100f);
+        
+        GameManager.Instance.UpdateScore((int)(Random.value * Random.value * 100f));
+        // Where the rules are made up and the points don't matter
+        //     int i = 0;
+        //     float totalRemaining = 0;
+        //     float totalStartingHoleArea = 0;
+        //     foreach (var hole in holes){
+        //         if(patches.Count > i){
+        //             totalRemaining += CalculateRemainingAndOverlapArea(hole, patches[i]);
+        //         } else {
+        //             totalRemaining += CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh);
+        //         }
+        //         totalStartingHoleArea += CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh); //Same calc as above for else hole mesh area;
+        //         i++;
+        //     }
+            
+        //     int finalScore = (int)(((totalStartingHoleArea - totalRemaining)/totalStartingHoleArea)*100f);
+            
+        //     Debug.Log("totalStartingHoleArea:"+totalStartingHoleArea);
+        //     Debug.Log("totalRemaining:"+totalRemaining);
+        //     Debug.Log("final:"+finalScore);
+        //     GameManager.Instance.UpdateScore(
+        //         System.Math.Abs(finalScore)
+        //         );
+        // }
 
-        GameManager.Instance.UpdateScore(
-            System.Math.Abs(finalScore)
-            );
-    }
+        // private float CalculateRemainingAndOverlapArea(GameObject hole, GameObject patch)
+        // {
+        //     float patchArea = CalculateMeshArea(patch.GetComponent<MeshFilter>().mesh);
+        //     float holeArea = CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh);
+        //     float areaResult = holeArea - patchArea;
+        //     Debug.Log("patchArea:"+patchArea);
+        //     Debug.Log("holeArea:"+holeArea);
+        //     return System.Math.Abs(areaResult);
+        // } 
 
-    private float CalculateRemainingAndOverlapArea(GameObject hole, GameObject patch)
-    {
-        float patchArea = CalculateMeshArea(patch.GetComponent<MeshFilter>().mesh);
-        float holeArea = CalculateMeshArea(patch.GetComponent<MeshFilter>().mesh);
-        float areaResult = holeArea - patchArea;
-
-        //TODO: This is stuffed, please need to figure out how to factor in distance
-        float distance = Vector3.Distance(
-            hole.transform.position,
-            patch.transform.position
-        );
-
-        if(patchArea > holeArea && patchArea < (holeArea * 1.1)){
-            return 0; 
-        } else {
-            return System.Math.Abs(areaResult);
-        }
-    } 
-
-    private float CalculateMeshArea(Mesh mesh)
-    {
-        var triangles = mesh.triangles;
-        var vertices = mesh.vertices;
-
-        float sum = 0.0f;
-
-        for(int i = 0; i < triangles.Length; i += 3) {
-            Vector3 corner = vertices[triangles[i]];
-            Vector3 a = vertices[triangles[i + 1]] - corner;
-            Vector3 b = vertices[triangles[i + 2]] - corner;
-
-            sum += Vector3.Cross(a, b).magnitude;
-        }
-
-        return sum/2.0f;
+        // private float CalculateMeshArea(Mesh mesh)
+        // {
+        //     var triangles = mesh.triangles;
+        //     var vertices = mesh.vertices;
+            
+        //     float result = 0f;
+        //     for(int p = 0; p < triangles.Length; p += 3)
+        //     {
+        //         result += (Vector3.Cross(vertices[triangles[p+1]] - vertices[triangles[p]],
+        //                     vertices[triangles[p+2]] - vertices[triangles[p]])).magnitude;
+        //     }
+        //     result *= 0.5f;
+        //     return result;
     }
 
     private void Restart()
