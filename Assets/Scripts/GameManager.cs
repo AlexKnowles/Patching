@@ -45,11 +45,11 @@ public class GameManager : MonoBehaviour
         {
             restartMethod();
         }
-        Score = 0;
     }
 
     public void LoadTutorial()
     {
+        Score = 0;
         ShowTutorial();
 
         foreach(Action beforeTutorialMethod in _beforeTutorialMethods)
