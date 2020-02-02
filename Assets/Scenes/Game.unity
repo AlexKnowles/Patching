@@ -492,6 +492,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Offcut (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8955456572832838879, guid: c2b8ff7010c82bc4eaa60607aefff94d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8955456572832838876, guid: c2b8ff7010c82bc4eaa60607aefff94d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c2b8ff7010c82bc4eaa60607aefff94d, type: 3}
@@ -1297,7 +1302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8870f8484a3fda2459df7a0d687269ca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f9a29da6fe0f72649a213dfce05359b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1416,6 +1421,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Offcut
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955456572832838879, guid: c2b8ff7010c82bc4eaa60607aefff94d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2b8ff7010c82bc4eaa60607aefff94d, type: 3}
@@ -2130,6 +2140,7 @@ GameObject:
   - component: {fileID: 1500170339}
   - component: {fileID: 1500170342}
   - component: {fileID: 1500170340}
+  - component: {fileID: 1500170343}
   m_Layer: 5
   m_Name: Patch
   m_TagString: Untagged
@@ -2207,6 +2218,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500170338}
   m_CullTransparentMesh: 0
+--- !u!114 &1500170343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500170338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8870f8484a3fda2459df7a0d687269ca, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1544336598
 GameObject:
   m_ObjectHideFlags: 0
