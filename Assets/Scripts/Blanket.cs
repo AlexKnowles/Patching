@@ -75,10 +75,10 @@ public class Blanket : MonoBehaviour
     private void CalculateScore(List<GameObject> holes, List<GameObject> patches)
     {
         int i = 0;
-        int totalRemaining = 0;
-        int totalStartingHoleArea = 0;
+        float totalRemaining = 0;
+        float totalStartingHoleArea = 0;
         foreach (var hole in holes){
-            int remaining = 0;
+            float remaining = 0;
             if(patches.Count > i){
                 remaining = CalculateRemainingAndOverlapArea(hole, patches[i]);
             } else {
@@ -88,25 +88,39 @@ public class Blanket : MonoBehaviour
             totalStartingHoleArea += CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh); //Same calc as above for else hole mesh area;
             i++;
         }
-
-        int rawScore = (totalStartingHoleArea - (totalStartingHoleArea - totalRemaining));
+        float rawScore = (totalStartingHoleArea - (totalStartingHoleArea - totalRemaining));
         int finalScore = 100 - (int)(((float)totalStartingHoleArea / (float)rawScore) * 100f);
+
         GameManager.Instance.UpdateScore(
-            finalScore
+            System.Math.Abs(finalScore)
             );
     }
 
-    private int CalculateRemainingAndOverlapArea(GameObject hole, GameObject patch)
+    private float CalculateRemainingAndOverlapArea(GameObject hole, GameObject patch)
     {
-        return CalculateMeshArea(patch.GetComponent<MeshFilter>().mesh);
+        float patchArea = CalculateMeshArea(patch.GetComponent<MeshFilter>().mesh);
+        float holeArea = CalculateMeshArea(patch.GetComponent<MeshFilter>().mesh);
+        float areaResult = holeArea - patchArea;
+
+        //TODO: This is stuffed, please need to figure out how to factor in distance
+        float distance = Vector3.Distance(
+            hole.transform.position,
+            patch.transform.position
+        );
+
+        if(patchArea > holeArea && patchArea < (holeArea * 1.1)){
+            return 0; 
+        } else {
+            return System.Math.Abs(areaResult);
+        }
     } 
 
-    private int CalculateMeshArea(Mesh mesh)
+    private float CalculateMeshArea(Mesh mesh)
     {
         var triangles = mesh.triangles;
         var vertices = mesh.vertices;
 
-        double sum = 0.0;
+        float sum = 0.0f;
 
         for(int i = 0; i < triangles.Length; i += 3) {
             Vector3 corner = vertices[triangles[i]];
@@ -116,7 +130,7 @@ public class Blanket : MonoBehaviour
             sum += Vector3.Cross(a, b).magnitude;
         }
 
-        return (int)(sum/2.0);
+        return sum/2.0f;
     }
 
     private void Restart()
