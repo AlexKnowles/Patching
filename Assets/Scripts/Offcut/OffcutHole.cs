@@ -28,9 +28,15 @@ public class OffcutHole : MonoBehaviour
         _currentCutout = null;
     }
 
+    public void GameOver()
+    {
+        
+    }
+
     private void Start() 
     {
         _thisTransform = GetComponent<Transform>();
+        GameManager.Instance.RegisterGameOver(GameOver);
     }
 
     private void SetupTransform()

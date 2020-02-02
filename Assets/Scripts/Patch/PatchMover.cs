@@ -12,33 +12,42 @@ public class PatchMover : MonoBehaviour
     private Vector3 _mousePostionRelativeToPatch;
     private bool _patchDropped = false;
     private bool _hasStarted = false;
+    private bool _gameOver = false;
 
     private void Start() 
     {
-        Reset(); 
+        Restart(); 
         _mouseDrag = new MouseDrag(StartMove, FinishMove);
+        GameManager.Instance.RegisterGameOver(GameOver);
+        GameManager.Instance.RegisterRestart(Restart);
     }
 
     private void Update() 
     {
         _mouseDrag.Update();
 
-        if(!_patchDropped && _mouseDrag.IsDragging && Cutter.IsCutFinished()) 
+        if(!_patchDropped && _mouseDrag.IsDragging && Cutter.IsCutFinished() && !_gameOver) 
         {            
             UpdateMove();
         }   
     }
 
-    public void Reset() 
+    public void Restart() 
     {
         _patchObjectTransform = Maker.CurrentPatch.GetComponent<Transform>();
         _patchDropped = false;
         _hasStarted = false;
+        _gameOver = false;
+    }
+    public void GameOver()
+    {
+        _gameOver = true;
+        FinishMove();
     }
 
     public void StartMove()
     {
-        if(!Cutter.IsCutFinished() || _patchDropped)
+        if(!Cutter.IsCutFinished() || _patchDropped || _gameOver)
             return;
         
         _hasStarted = true;

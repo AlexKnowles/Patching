@@ -30,7 +30,7 @@ public class PatchMaker : MonoBehaviour
 
         CreatePatch();
 
-        Cutter.Reset();
-        Mover.Reset();
+        Cutter.Restart();
+        Mover.Restart();
     }
 }

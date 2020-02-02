@@ -18,18 +18,21 @@ public class PatchCutter : MonoBehaviour
     private Bounds _offcutHoleBounds;
     private bool _canCut = true;
     private bool _isCutting = false;
+    private bool _gameOver = false;
 
     private void Start() 
     {
-        Reset();
+        Restart();
         _mouseDrag = new MouseDrag(StartCut, FinishCut);
+        GameManager.Instance.RegisterGameOver(GameOver);
+        GameManager.Instance.RegisterRestart(Restart);
     }
 
     private void Update() 
     {
         _mouseDrag.Update();
 
-        if(_mouseDrag.IsDragging && _isCutting)
+        if(_mouseDrag.IsDragging && _isCutting && !_gameOver)
         {
             Vector2 mouseCurrentWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
@@ -45,7 +48,7 @@ public class PatchCutter : MonoBehaviour
         return (!_canCut && !_isCutting);
     }
 
-    public void Reset()
+    public void Restart()
     {
         _offcutHoleTransform = OffcutHole.GetComponent<Transform>();
         _offcutHoleBounds = OffcutHole.GetComponent<MeshFilter>().mesh.bounds;
@@ -53,9 +56,17 @@ public class PatchCutter : MonoBehaviour
         _patchObjectMeshFilter = Maker.CurrentPatch.GetComponent<MeshFilter>();
         _patchObjectMeshRenderer = Maker.CurrentPatch.GetComponent<MeshRenderer>();
 
+        _gameOver = false;
         _canCut = true;
         _isCutting = false;
 
+        OffcutHole.Clear();
+    }
+
+    public void GameOver()
+    {
+        _gameOver = true;
+        FinishCut();
         OffcutHole.Clear();
     }
 
