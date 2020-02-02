@@ -21,7 +21,6 @@ public class Hole : MonoBehaviour
             Vertices2D.Add(new Vector2(0.5f, 1.0f));
             Vertices2D.Add(new Vector2(-1.30f, 0.0f));
             Vertices2D.Add(new Vector2(0.4f, -1.05f));
-            Vertices2D.ForEach(x => Debug.Log($"X: {x.x}, Y: {x.y}"));
         } else {
             int spokes = 16;
             for (int i = 0; i < spokes; i++){
