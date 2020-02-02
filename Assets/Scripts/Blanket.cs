@@ -9,6 +9,7 @@ public class Blanket : MonoBehaviour
     public Material HoleMaterial;
     public CameraController CameraController;
     public int Score = 0;
+    public Stencil Stencil;
 
     private Transform _thisTransform;
     private List<GameObject> _holes = new List<GameObject>();
@@ -40,7 +41,7 @@ public class Blanket : MonoBehaviour
         {
             var holePosition = new Vector3(_xPos * _xMod, _yPos * _yMod, 1);
 
-            GameObject newHole = Instantiate(hole, holePosition , Quaternion.Euler(0, 0, 30 * UnityEngine.Random.value), _thisTransform);
+            GameObject newHole = Instantiate(hole, holePosition , Quaternion.Euler(0, 0, 0), _thisTransform);
             newHole.name = "My Hole " + i;
             newHole.GetComponent<Hole>().Difficulty = i;
             newHole.GetComponent<MeshRenderer>().material = HoleMaterial;
@@ -48,6 +49,8 @@ public class Blanket : MonoBehaviour
 
             SpiraliseHoles();
         }
+        
+        Stencil.GiveHole(_holes[0]);    
     }
     
     public void ReceivePatch(GameObject patch)
@@ -59,6 +62,7 @@ public class Blanket : MonoBehaviour
             _patches.Add(patch);
 
             CameraController.MoveToPoint(_holes[_patches.Count].transform.position);
+            Stencil.GiveHole(_holes[_patches.Count]);   
         } 
         else 
         {

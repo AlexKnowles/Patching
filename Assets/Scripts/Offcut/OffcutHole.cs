@@ -8,6 +8,8 @@ public class OffcutHole : MonoBehaviour
     public Color BackgroundColor = new Color(0,0,0, 69/255f);
     public Material HoleMaterial;
     public GameObject ShadowBox;
+    public LineRenderer Stencil;
+
     private Transform _thisTransform;
     private MeshRenderer _meshRenderer;
     private GameObject _currentCutout;
@@ -19,6 +21,8 @@ public class OffcutHole : MonoBehaviour
         SetupTransform();
         SetupLineRenderer();
         SetupTexture();
+
+        Stencil.enabled = false;
     }
 
     public void Clear()
@@ -28,6 +32,7 @@ public class OffcutHole : MonoBehaviour
 
         GameObject.Destroy(_currentCutout); 
         _currentCutout = null;
+        Stencil.enabled = true;
     }
 
     private void Start() 
@@ -76,10 +81,12 @@ public class OffcutHole : MonoBehaviour
     {
         ShadowBox.SetActive(true);
         _meshRenderer.enabled = true;
+        Stencil.enabled = true;
     }
     private void Hide()
     {
         ShadowBox.SetActive(false);
         _meshRenderer.enabled = false;
+        Stencil.enabled = false;
     }
 }
