@@ -14,7 +14,6 @@ public class Stencil : MonoBehaviour
     {
         _thisTransform = GetComponent<Transform>();
         _lineRenderer = GetComponent<LineRenderer>();
-
     }
 
     private void Update()

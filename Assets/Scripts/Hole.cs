@@ -9,10 +9,15 @@ public class Hole : MonoBehaviour
     public int Difficulty = 1;
     public List<Vector2> Vertices2D { get; private set; }
 
+    private LineRenderer _lineRenderer;
+
     void Start()
     {
         Vertices2D = new List<Vector2>();
+        _lineRenderer = GetComponent<LineRenderer>();
+
         GetComponent<MeshFilter>().mesh = GenerateShape();
+        LoadVertsIntoLineRenderer();
     }
 
     private Mesh GenerateShape()
@@ -49,5 +54,18 @@ public class Hole : MonoBehaviour
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
         return mesh;
+    }
+
+    
+    private void LoadVertsIntoLineRenderer()
+    {
+        _lineRenderer.positionCount = 0;
+
+        foreach(Vector2 vert in Vertices2D)
+        {
+            _lineRenderer.SetPosition(_lineRenderer.positionCount++, new Vector3(vert.x, vert.y, 0));
+        }
+
+        _lineRenderer.SetPosition(_lineRenderer.positionCount++, new Vector3(Vertices2D[0].x, Vertices2D[0].y, 0));
     }
 }
