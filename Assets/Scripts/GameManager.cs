@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameObject Tutorial;
+    public int Score { get; private set; }
 
     private List<Action> _gameOverMethods;
     private List<Action> _restartMethods;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         {
             restartMethod();
         }
+        Score = 0;
     }
 
     public void LoadTutorial()
@@ -78,5 +80,8 @@ public class GameManager : MonoBehaviour
     {
         _showingTutorial = false;
         Tutorial.SetActive(false);
+    }
+    public void UpdateScore(int score){
+        Score = score;
     }
 }

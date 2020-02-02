@@ -8,6 +8,7 @@ public class Blanket : MonoBehaviour
     public GameObject hole;
     public Material HoleMaterial;
     public CameraController CameraController;
+    public int Score = 0;
 
     private Transform _thisTransform;
     private List<GameObject> _holes = new List<GameObject>();
@@ -68,7 +69,56 @@ public class Blanket : MonoBehaviour
     private void GameOver()
     {
         _gameOver = true;
+        CalculateScore(_holes, _patches);
     } 
+
+    private void CalculateScore(List<GameObject> holes, List<GameObject> patches)
+    {
+        int i = 0;
+        int totalRemaining = 0;
+        int totalStartingHoleArea = 0;
+        foreach (var hole in holes){
+            int remaining = 0;
+            if(patches.Count > i){
+                remaining = CalculateRemainingAndOverlapArea(hole, patches[i]);
+            } else {
+                remaining = CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh);
+            }
+            totalRemaining += remaining;
+            totalStartingHoleArea += CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh); //Same calc as above for else hole mesh area;
+            i++;
+        }
+
+        int rawScore = (totalStartingHoleArea - (totalStartingHoleArea - totalRemaining));
+        int finalScore = 100 - (int)(((float)totalStartingHoleArea / (float)rawScore) * 100f);
+        GameManager.Instance.UpdateScore(
+            finalScore
+            );
+    }
+
+    private int CalculateRemainingAndOverlapArea(GameObject hole, GameObject patch)
+    {
+        return CalculateMeshArea(patch.GetComponent<MeshFilter>().mesh);
+    } 
+
+    private int CalculateMeshArea(Mesh mesh)
+    {
+        var triangles = mesh.triangles;
+        var vertices = mesh.vertices;
+
+        double sum = 0.0;
+
+        for(int i = 0; i < triangles.Length; i += 3) {
+            Vector3 corner = vertices[triangles[i]];
+            Vector3 a = vertices[triangles[i + 1]] - corner;
+            Vector3 b = vertices[triangles[i + 2]] - corner;
+
+            sum += Vector3.Cross(a, b).magnitude;
+        }
+
+        return (int)(sum/2.0);
+    }
+
     private void Restart()
     {
         _gameOver = false;
