@@ -17,7 +17,7 @@ public class Hole : MonoBehaviour
 
     private Mesh GenerateShape()
     {
-        int spokes = Difficulty + 3 < 6 ? Difficulty + 3 : 16;
+        int spokes = Difficulty < 1 ? 3 : 16;
         for (int i = 0; i < spokes; i++){
             int posNeg = UnityEngine.Random.value > 0.5 ? 1 : -1;
             float radius = 1f + (float)(((float)spokes*0.05f) * ((UnityEngine.Random.value * 0.4f) * (float)posNeg));
