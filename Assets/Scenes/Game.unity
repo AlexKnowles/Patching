@@ -490,7 +490,7 @@ PrefabInstance:
     - target: {fileID: 8955456572832838879, guid: c2b8ff7010c82bc4eaa60607aefff94d,
         type: 3}
       propertyPath: m_Name
-      value: Offcut (1)
+      value: Offcut_Shadow
       objectReference: {fileID: 0}
     - target: {fileID: 8955456572832838879, guid: c2b8ff7010c82bc4eaa60607aefff94d,
         type: 3}
@@ -1343,6 +1343,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 572021608}
     m_Modifications:
+    - target: {fileID: 8955456572832838874, guid: c2b8ff7010c82bc4eaa60607aefff94d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8955456572832838876, guid: c2b8ff7010c82bc4eaa60607aefff94d,
         type: 3}
       propertyPath: Maker
@@ -1373,6 +1378,11 @@ PrefabInstance:
       propertyPath: BackgroundColor.a
       value: 0.25490198
       objectReference: {fileID: 0}
+    - target: {fileID: 8955456572832838876, guid: c2b8ff7010c82bc4eaa60607aefff94d,
+        type: 3}
+      propertyPath: ShadowBox
+      value: 
+      objectReference: {fileID: 1020995891}
     - target: {fileID: 8955456572832838877, guid: c2b8ff7010c82bc4eaa60607aefff94d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1675,6 +1685,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980112093}
   m_CullTransparentMesh: 0
+--- !u!1 &1020995891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8955456572832838879, guid: c2b8ff7010c82bc4eaa60607aefff94d,
+    type: 3}
+  m_PrefabInstance: {fileID: 89574324}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1060211114
 GameObject:
   m_ObjectHideFlags: 0

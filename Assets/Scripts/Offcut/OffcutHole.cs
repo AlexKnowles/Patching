@@ -7,7 +7,9 @@ public class OffcutHole : MonoBehaviour
     public PatchMaker Maker;    
     public Color BackgroundColor = new Color(0,0,0, 69/255f);
     public Material HoleMaterial;
+    public GameObject ShadowBox;
     private Transform _thisTransform;
+    private MeshRenderer _meshRenderer;
     private GameObject _currentCutout;
 
     public void Create()
@@ -31,12 +33,20 @@ public class OffcutHole : MonoBehaviour
     private void Start() 
     {
         _thisTransform = GetComponent<Transform>();
+        _meshRenderer = GetComponent<MeshRenderer>();
         GameManager.Instance.RegisterGameOver(GameOver);
+        GameManager.Instance.RegisterBeforeTutorial(BeforeTutorial);
+    }
+
+    public void BeforeTutorial()
+    {
+        Show();
     }
 
     public void GameOver()
     {
         Clear();
+        Hide();
     }
 
     private void SetupTransform()
@@ -60,5 +70,16 @@ public class OffcutHole : MonoBehaviour
     {
         MeshRenderer cutoutRenderer = _currentCutout.GetComponent<MeshRenderer>();        
         cutoutRenderer.material = HoleMaterial;
+    }
+
+    private void Show()
+    {
+        ShadowBox.SetActive(true);
+        _meshRenderer.enabled = true;
+    }
+    private void Hide()
+    {
+        ShadowBox.SetActive(false);
+        _meshRenderer.enabled = false;
     }
 }
