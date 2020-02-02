@@ -49,7 +49,6 @@ public class PatchCutter : MonoBehaviour
 
     public void Restart()
     {
-        FinishCut();
         NewPatch();
         StartCut();
     }
