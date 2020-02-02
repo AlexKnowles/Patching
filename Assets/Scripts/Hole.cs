@@ -19,7 +19,7 @@ public class Hole : MonoBehaviour
         int spokes = Difficulty + 3 < 6 ? Difficulty + 3 : 16;
         for (int i = 0; i < spokes; i++){
             int posNeg = UnityEngine.Random.value > 0.5 ? 1 : -1;
-            float radius = 1f + (float)(((float)spokes*0.05f) * (UnityEngine.Random.value * (float)posNeg));
+            float radius = 1f + (float)(((float)spokes*0.05f) * ((UnityEngine.Random.value * 0.4f) * (float)posNeg));
             float angle = i * Mathf.PI * 2 / (spokes);
             vertices2D.Add(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius);
         }
