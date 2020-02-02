@@ -17,12 +17,19 @@ public class Hole : MonoBehaviour
 
     private Mesh GenerateShape()
     {
-        int spokes = Difficulty < 1 ? 3 : 16;
-        for (int i = 0; i < spokes; i++){
-            int posNeg = UnityEngine.Random.value > 0.5 ? 1 : -1;
-            float radius = 1f + (float)(((float)spokes*0.05f) * ((UnityEngine.Random.value * 0.4f) * (float)posNeg));
-            float angle = i * Mathf.PI * 2 / (spokes);
-            Vertices2D.Add(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius);
+        if(Difficulty == 0){
+            Vertices2D.Add(new Vector2(0.5f, 1.0f));
+            Vertices2D.Add(new Vector2(-1.30f, 0.0f));
+            Vertices2D.Add(new Vector2(0.4f, -1.05f));
+            Vertices2D.ForEach(x => Debug.Log($"X: {x.x}, Y: {x.y}"));
+        } else {
+            int spokes = 16;
+            for (int i = 0; i < spokes; i++){
+                int posNeg = UnityEngine.Random.value > 0.5 ? 1 : -1;
+                float radius = 1f + (float)(((float)spokes*0.05f) * ((UnityEngine.Random.value * 0.4f) * (float)posNeg));
+                float angle = i * Mathf.PI * 2 / (spokes);
+                Vertices2D.Add(new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius);
+            }
         }
 
         return _getMeshFromVectors(Vertices2D.ToArray());
