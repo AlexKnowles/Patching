@@ -584,6 +584,7 @@ GameObject:
   - component: {fileID: 206222179}
   - component: {fileID: 206222181}
   - component: {fileID: 206222180}
+  - component: {fileID: 206222182}
   m_Layer: 5
   m_Name: StarOne (3)
   m_TagString: Untagged
@@ -647,6 +648,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206222178}
   m_CullTransparentMesh: 0
+--- !u!114 &206222182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206222178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.23529412}
+  m_EffectDistance: {x: 5, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!4 &229667886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8955456572832838877, guid: c2b8ff7010c82bc4eaa60607aefff94d,
@@ -2309,6 +2325,7 @@ GameObject:
   - component: {fileID: 1584834294}
   - component: {fileID: 1584834296}
   - component: {fileID: 1500170341}
+  - component: {fileID: 1584834295}
   m_Layer: 5
   m_Name: StarOne
   m_TagString: Untagged
@@ -2336,6 +2353,21 @@ RectTransform:
   m_AnchoredPosition: {x: -392, y: 72}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1584834295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584834293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.23529412}
+  m_EffectDistance: {x: 5, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!222 &1584834296
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2545,6 +2577,7 @@ GameObject:
   - component: {fileID: 1734110342}
   - component: {fileID: 1734110344}
   - component: {fileID: 1734110343}
+  - component: {fileID: 1734110345}
   m_Layer: 5
   m_Name: StarOne (2)
   m_TagString: Untagged
@@ -2608,6 +2641,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734110341}
   m_CullTransparentMesh: 0
+--- !u!114 &1734110345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734110341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.23529412}
+  m_EffectDistance: {x: 5, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1838290440
 GameObject:
   m_ObjectHideFlags: 0
@@ -2955,6 +3003,7 @@ GameObject:
   - component: {fileID: 1999112447}
   - component: {fileID: 1999112449}
   - component: {fileID: 1999112448}
+  - component: {fileID: 1999112450}
   m_Layer: 5
   m_Name: StarOne (1)
   m_TagString: Untagged
@@ -3018,6 +3067,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999112446}
   m_CullTransparentMesh: 0
+--- !u!114 &1999112450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999112446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.23529412}
+  m_EffectDistance: {x: 5, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2002679101
 GameObject:
   m_ObjectHideFlags: 0
