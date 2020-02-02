@@ -65,11 +65,10 @@ public class OffcutHole : MonoBehaviour
         LineRenderer cutoutLineRender = _currentCutout.GetComponent<LineRenderer>();
         cutoutLineRender.enabled = true;
 
-        cutoutLineRender.startWidth = 0.1f;
-        cutoutLineRender.endWidth = 0.1f;
+        cutoutLineRender.startWidth *= 3f;
+        cutoutLineRender.endWidth *= 3f;
 
-        cutoutLineRender.startColor = BackgroundColor;
-        cutoutLineRender.endColor = BackgroundColor;
+        cutoutLineRender.material = HoleMaterial;
     }
     private void SetupTexture()
     {

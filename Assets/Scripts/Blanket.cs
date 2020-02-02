@@ -78,55 +78,69 @@ public class Blanket : MonoBehaviour
 
     private void CalculateScore(List<GameObject> holes, List<GameObject> patches)
     {
-        
-        GameManager.Instance.UpdateScore((int)(Random.value * Random.value * 100f));
+        // GameManager.Instance.UpdateScore((int)(Random.value * Random.value * 100f));
         // Where the rules are made up and the points don't matter
-        //     int i = 0;
-        //     float totalRemaining = 0;
-        //     float totalStartingHoleArea = 0;
-        //     foreach (var hole in holes){
-        //         if(patches.Count > i){
-        //             totalRemaining += CalculateRemainingAndOverlapArea(hole, patches[i]);
-        //         } else {
-        //             totalRemaining += CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh);
-        //         }
-        //         totalStartingHoleArea += CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh); //Same calc as above for else hole mesh area;
-        //         i++;
-        //     }
-            
-        //     int finalScore = (int)(((totalStartingHoleArea - totalRemaining)/totalStartingHoleArea)*100f);
-            
-        //     Debug.Log("totalStartingHoleArea:"+totalStartingHoleArea);
-        //     Debug.Log("totalRemaining:"+totalRemaining);
-        //     Debug.Log("final:"+finalScore);
-        //     GameManager.Instance.UpdateScore(
-        //         System.Math.Abs(finalScore)
-        //         );
-        // }
+        int i = 0;
+        float totalRemaining = 0;
+        float totalStartingHoleArea = 0;
 
-        // private float CalculateRemainingAndOverlapArea(GameObject hole, GameObject patch)
-        // {
-        //     float patchArea = CalculateMeshArea(patch.GetComponent<MeshFilter>().mesh);
-        //     float holeArea = CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh);
-        //     float areaResult = holeArea - patchArea;
-        //     Debug.Log("patchArea:"+patchArea);
-        //     Debug.Log("holeArea:"+holeArea);
-        //     return System.Math.Abs(areaResult);
-        // } 
+        foreach (var hole in holes){
+            if(patches.Count > i){
+                totalRemaining += CalculateRemainingAndOverlapArea(hole, patches[i]);
+            } else {
+                totalRemaining += 1;
+            }
+            totalStartingHoleArea += 1; //Same calc as above for else hole mesh area;
+            i++;
+        }
+        
+        int finalScore = (int)(((totalStartingHoleArea - totalRemaining)/totalStartingHoleArea)*100f);
+        
+        if(finalScore < 0) 
+            finalScore = 0;
 
-        // private float CalculateMeshArea(Mesh mesh)
-        // {
-        //     var triangles = mesh.triangles;
-        //     var vertices = mesh.vertices;
-            
-        //     float result = 0f;
-        //     for(int p = 0; p < triangles.Length; p += 3)
-        //     {
-        //         result += (Vector3.Cross(vertices[triangles[p+1]] - vertices[triangles[p]],
-        //                     vertices[triangles[p+2]] - vertices[triangles[p]])).magnitude;
-        //     }
-        //     result *= 0.5f;
-        //     return result;
+        Debug.Log("totalStartingHoleArea:"+totalStartingHoleArea);
+        Debug.Log("totalRemaining:"+totalRemaining);
+        Debug.Log("final:"+finalScore);
+        GameManager.Instance.UpdateScore(finalScore);
+    }
+
+    private float CalculateRemainingAndOverlapArea(GameObject hole, GameObject patch)
+    {
+        float patchArea = CalculateMeshArea(patch.GetComponent<MeshFilter>().mesh) * 2;
+        float holeArea = CalculateMeshArea(hole.GetComponent<MeshFilter>().mesh) * 10;
+
+        float minScoreArea = (holeArea * 0.95f);
+        float maxScoreArea = (holeArea * 1.2f);
+
+        Debug.Log("patchArea:"+patchArea);
+        Debug.Log("holeArea:"+holeArea);
+
+        if((patchArea < minScoreArea) || (patchArea > maxScoreArea))
+            return 1;
+        
+        return 0;
+    } 
+
+    private float CalculateMeshArea(Mesh mesh)
+    {
+        Vector3 direction = Vector3.forward;
+        var triangles = mesh.triangles;
+        var vertices = mesh.vertices;
+
+        double sum = 0.0;
+
+        for(int i = 0; i < triangles.Length; i += 3) {
+            Vector3 corner = vertices[triangles[i]];
+            Vector3 a = vertices[triangles[i + 1]] - corner;
+            Vector3 b = vertices[triangles[i + 2]] - corner;
+
+            float projection = Vector3.Dot(Vector3.Cross(b, a), direction);
+            if (projection > 0f)
+                sum += projection;
+        }
+
+        return (float)(sum/2.0);
     }
 
     private void Restart()
