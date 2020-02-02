@@ -16,21 +16,33 @@ public class PatchMaker : MonoBehaviour
     private void Awake()
     {
         _thisTransform = GetComponent<Transform>();
-        CreatePatch();
+        BeforeTutorial();
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.RegisterBeforeTutorial(BeforeTutorial);
     }
 
     public void CreatePatch()
     {
         CurrentPatch = Instantiate(PatchObjectPrefab, _thisTransform);
+
+        Cutter.NewPatch();
+        Mover.Restart();
     }
 
     public void SendPatchToBlanket()
     {
         Blanket.ReceivePatch(CurrentPatch);
+        CreatePatch();
+    }
+
+    private void BeforeTutorial()
+    {
+        if( CurrentPatch != null)
+            GameObject.Destroy(CurrentPatch);
 
         CreatePatch();
-
-        Cutter.NewPatch();
-        Mover.Restart();
     }
 }
