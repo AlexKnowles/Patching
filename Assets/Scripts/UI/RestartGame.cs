@@ -14,7 +14,7 @@ public class RestartGame: MonoBehaviour
         _button = GetComponent<Button>();
 
         GameManager.Instance.RegisterGameOver(GameOver);
-        GameManager.Instance.RegisterRestart(Restart);
+        GameManager.Instance.RegisterBeforeTutorial(Restart);
 
         Restart();
     }

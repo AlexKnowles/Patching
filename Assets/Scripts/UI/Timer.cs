@@ -13,8 +13,11 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.RegisterRestart(Restart);
+        GameManager.Instance.RegisterBeforeTutorial(BeforeTutorial);
+     
         _slider = GetComponent<Slider>();
-        Restart();
+
+        BeforeTutorial();
     }
 
     private void Update()
@@ -34,5 +37,10 @@ public class Timer : MonoBehaviour
     private void Restart() 
     {
         _timePassed = 0;
+    }
+    private void BeforeTutorial()
+    {
+        _timePassed = GameLength;
+        _slider.value = _timePassed;
     }
 }

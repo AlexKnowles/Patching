@@ -150,8 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49473f809022fdf469070133338c06ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EndTime: 0
-  StartTime: 0
+  Tutorial: {fileID: 2079195160}
 --- !u!4 &47032743
 Transform:
   m_ObjectHideFlags: 0
@@ -164,7 +163,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &63842660
 GameObject:
@@ -806,7 +805,7 @@ Transform:
   - {fileID: 85300510}
   - {fileID: 229667886}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &572021609
 MonoBehaviour:
@@ -905,7 +904,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 47032742}
-        m_MethodName: Restart
+        m_MethodName: LoadTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1023,7 +1022,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 862565760}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1210,8 +1209,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1500170339}
   - {fileID: 684062610}
+  - {fileID: 1500170339}
   m_Father: {fileID: 2079195161}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1404,7 +1403,7 @@ Transform:
   m_LocalScale: {x: 9.18, y: 1, z: 6.62}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1146038231
 GameObject:
@@ -1532,7 +1531,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1312439249
 GameObject:
@@ -1708,7 +1707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c70a5ebdc3cd584092917a00f287866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameLength: 200
+  GameLength: 20
 --- !u!1 &1467118048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,7 +1811,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 862565760}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1915,7 +1914,7 @@ PrefabInstance:
     - target: {fileID: 6256511880276377630, guid: b1c4dad02dab3cc49bb264fb4094b6b0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6256511880276377630, guid: b1c4dad02dab3cc49bb264fb4094b6b0,
         type: 3}
@@ -2285,7 +2284,7 @@ RectTransform:
   - {fileID: 1389129450}
   - {fileID: 2079195161}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2395,7 +2394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2079195161}
   m_Layer: 5
-  m_Name: Help
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2453,7 +2452,7 @@ Transform:
   m_Children:
   - {fileID: 2002679102}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2136844003
 MonoBehaviour:

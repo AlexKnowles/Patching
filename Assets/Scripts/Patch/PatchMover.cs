@@ -12,11 +12,10 @@ public class PatchMover : MonoBehaviour
     private Vector3 _mousePostionRelativeToPatch;
     private bool _patchDropped = false;
     private bool _hasStarted = false;
-    private bool _gameOver = false;
+    private bool _gameOver = true;
 
     private void Start() 
     {
-        Restart(); 
         _mouseDrag = new MouseDrag(StartMove, FinishMove);
         GameManager.Instance.RegisterGameOver(GameOver);
         GameManager.Instance.RegisterRestart(Restart);

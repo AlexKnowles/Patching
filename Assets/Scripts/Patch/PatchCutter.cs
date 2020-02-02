@@ -18,11 +18,10 @@ public class PatchCutter : MonoBehaviour
     private Bounds _offcutHoleBounds;
     private bool _canCut = true;
     private bool _isCutting = false;
-    private bool _gameOver = false;
+    private bool _gameOver = true;
 
     private void Start() 
     {
-        Restart();
         _mouseDrag = new MouseDrag(StartCut, FinishCut);
         GameManager.Instance.RegisterGameOver(GameOver);
         GameManager.Instance.RegisterRestart(Restart);
@@ -50,6 +49,20 @@ public class PatchCutter : MonoBehaviour
 
     public void Restart()
     {
+        FinishCut();
+        NewPatch();
+        StartCut();
+    }
+
+    public void GameOver()
+    {
+        _gameOver = true;
+        FinishCut();
+        OffcutHole.Clear();
+    }
+
+    public void NewPatch()
+    {
         _offcutHoleTransform = OffcutHole.GetComponent<Transform>();
         _offcutHoleBounds = OffcutHole.GetComponent<MeshFilter>().mesh.bounds;
         _patchObjectLineRenderer = Maker.CurrentPatch.GetComponent<LineRenderer>();
@@ -62,17 +75,9 @@ public class PatchCutter : MonoBehaviour
 
         OffcutHole.Clear();
     }
-
-    public void GameOver()
-    {
-        _gameOver = true;
-        FinishCut();
-        OffcutHole.Clear();
-    }
-
     private void StartCut()
     {
-        if(!_canCut)
+        if(!_canCut || _gameOver)
             return;
 
         _isCutting = true;

@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
         _thisTransform = GetComponent<Transform>();
 
         GameManager.Instance.RegisterGameOver(GameOver);
-        GameManager.Instance.RegisterRestart(Restart);
+        GameManager.Instance.RegisterBeforeTutorial(Restart);
 
         Restart();
     }
@@ -53,7 +53,7 @@ public class CameraController : MonoBehaviour
             -10
         );
 
-        if(Camera.main.orthographicSize < 35.0f)
+        if(Camera.main.orthographicSize < 28.0f)
         {
             Camera.main.orthographicSize += 0.1f;
         }

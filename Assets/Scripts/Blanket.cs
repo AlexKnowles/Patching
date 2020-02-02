@@ -23,7 +23,7 @@ public class Blanket : MonoBehaviour
         _thisTransform = GetComponent<Transform>();
         
         GameManager.Instance.RegisterGameOver(GameOver);
-        GameManager.Instance.RegisterRestart(Restart);
+        GameManager.Instance.RegisterBeforeTutorial(Restart);
 
         Restart();
     }
