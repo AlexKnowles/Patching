@@ -6,10 +6,12 @@ using UnityEngine;
 public class PatchCutter : MonoBehaviour
 {
     public PatchMaker Maker;
+    public Material PatchMaterial;
     public OffcutHole OffcutHole;
 
     private LineRenderer _patchObjectLineRenderer;
     private MeshFilter _patchObjectMeshFilter;
+    private MeshRenderer _patchObjectMeshRenderer;
     private MouseDrag _mouseDrag;
     private List<Vector2> _points = new List<Vector2>();
     private Transform _offcutHoleTransform;
@@ -49,6 +51,7 @@ public class PatchCutter : MonoBehaviour
         _offcutHoleBounds = OffcutHole.GetComponent<MeshFilter>().mesh.bounds;
         _patchObjectLineRenderer = Maker.CurrentPatch.GetComponent<LineRenderer>();
         _patchObjectMeshFilter = Maker.CurrentPatch.GetComponent<MeshFilter>();
+        _patchObjectMeshRenderer = Maker.CurrentPatch.GetComponent<MeshRenderer>();
 
         _canCut = true;
         _isCutting = false;
@@ -104,20 +107,28 @@ public class PatchCutter : MonoBehaviour
  
         // Create the Vector3 vertices
         Vector3[] vertices = new Vector3[_points.Count];
+        Vector2[] uvVerts = new Vector2[_points.Count];
         for (int i = 0; i < vertices.Length; i++) 
         {
             vertices[i] = new Vector3(_points[i].x, _points[i].y, 0);
+            //TODO: This is almost right
+            uvVerts[i] = Quaternion.Euler(0, 0, 90) * new Vector2(_points[i].x, _points[i].y);
         }
  
         // Create the mesh
         Mesh msh = new Mesh();
         msh.vertices = vertices;
         msh.triangles = indices.Reverse().ToArray();
-        msh.RecalculateNormals();
-        msh.RecalculateBounds();
- 
+        msh.uv = uvVerts;
+
         // Set up game object with mesh;
         _patchObjectMeshFilter.mesh = msh;
+        _patchObjectMeshFilter.mesh.RecalculateNormals();
+        _patchObjectMeshFilter.mesh.RecalculateBounds();
+        _patchObjectMeshFilter.mesh.RecalculateTangents();
+        _patchObjectMeshRenderer.material = PatchMaterial;
+        _patchObjectMeshRenderer.material.mainTextureScale = new Vector2(0.15f, 0.15f);
+ 
     }
 
     private void AddShadow()

@@ -1089,6 +1089,11 @@ PrefabInstance:
       propertyPath: OffcutHole
       value: 
       objectReference: {fileID: 689825882}
+    - target: {fileID: 6256511881648438754, guid: b1c4dad02dab3cc49bb264fb4094b6b0,
+        type: 3}
+      propertyPath: PatchMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c556dc5c0e2f0748b68615f620b752e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1c4dad02dab3cc49bb264fb4094b6b0, type: 3}
 --- !u!114 &1601147696 stripped
